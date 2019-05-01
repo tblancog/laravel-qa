@@ -54,29 +54,34 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         return view('question.show', compact('question'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
+      }
+      
+      /**
+       * Show the form for editing the specified resource.
+       *
+       * @param  \App\Question  $question
+       * @return \Illuminate\Http\Response
+       */
+      public function edit(Question $question)
+      {
+        return view('question.edit', compact('question'));
+      }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\AskQuestionRequest  $request
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(AskQuestionRequest $request, Question $question)
     {
-        //
+        $question->update(
+          $request->only('title', 'body')
+        );
+
+        return redirect()->route('questions.index')->with('success', 'Your question has been updated.');
+
     }
 
     /**
