@@ -28,4 +28,19 @@ class Question extends Model
       
       return $this->created_at->diffForHumans();
     }
+
+    /**
+     * Gets status as string, can be answered, unanswered and answer-accepted
+     * 
+     */
+    public function getStatusAttribute(){
+      
+      if($this->answers > 0){
+        if($this->best_answer_id){
+          return 'answer-accepted';
+        }
+        return 'answered';
+      }
+      return 'unanswered';
+    }
 }
