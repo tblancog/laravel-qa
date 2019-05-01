@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    protected $fillable = ['title', 'body'];
     public function user(){
       
       return $this->belongsTo(User::class);
@@ -42,5 +43,15 @@ class Question extends Model
         return 'answered';
       }
       return 'unanswered';
+    }
+
+        /**
+     * Gets url attribute
+     * 
+     */
+    public function getUrlAttribute(){
+      
+      // return route('question.show', $this->id);
+      return '#';
     }
 }
