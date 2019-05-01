@@ -18,5 +18,14 @@ class Question extends Model
 
       $this->attributes['title'] = $value;
       $this->attributes['slug'] = str_slug($value);
-    } 
+    }
+    
+    /**
+     * Gets date of creation attribute
+     * 
+     */
+    public function getDateCreatedAttribute(){
+      
+      return $this->created_at->diffForHumans();
+    }
 }
